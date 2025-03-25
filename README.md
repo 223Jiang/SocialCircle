@@ -1,7 +1,7 @@
-# User Center System
+# SocialCircle
 
 ## 项目简介
-User Center System 是一个现代化的用户中心管理系统，提供完整的用户管理、认证授权、文件存储等功能。该系统采用微服务架构设计，支持高并发、高可用，并遵循企业级开发规范。
+SocialCircle 是一个现代化的社交匹配与圈子管理系统，致力于为用户提供安全、高效、智能的社交体验。系统采用SpringBoot/Vue架构设计，支持高并发、高可用，并遵循企业级开发规范。
 
 ## 技术栈
 - **后端框架**: Spring Boot 2.6.13
@@ -10,7 +10,7 @@ User Center System 是一个现代化的用户中心管理系统，提供完整�
 - **缓存**: Redis
 - **对象存储**: MinIO
 - **API文档**: Knife4j (基于 Swagger)
-- **安全框架**: Spring Security + JBCrypt
+- **安全框架**: JBCrypt
 - **开发工具**: Lombok, Maven
 
 ## 主要功能
