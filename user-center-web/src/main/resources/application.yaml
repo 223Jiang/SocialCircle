@@ -1,0 +1,49 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/user_center?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: sy202412
+  profiles:
+    active: dev
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 5000ms
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete #默认deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+minio:
+  endpoint: https://ioapi.creativityhq.club
+  baseUrl: https://minio.creativityhq.club/api/v1/buckets
+  accessKey: Bo377eLJXRKFYeBkurqb
+  secretKey: fgboQykfdPKm5KQEzvDv6fg3PA3cDa2xeKRRNoDM
+  bucket: user-avatars
+knife4j:
+  enable: true
+  openapi:
+    title: API 接口文档
+    # aaa"
+    email: 2879838778jiang@gmail.com
+    concat: 果冻
+    url: https://github.com/223Jiang
+    version: v1.0
+    group:
+      dev:
+        group-name: dev
+        api-rule: package
+        api-rule-resources:
+          - org.wei.usercenterweb.controller

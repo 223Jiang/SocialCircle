@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.wei.usercenterweb.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="org.wei.usercenterweb.domain.User">
+        <id property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="userName" column="user_name" jdbcType="VARCHAR"/>
+        <result property="userCount" column="user_count" jdbcType="VARCHAR"/>
+        <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
+        <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="TINYINT"/>
+        <result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
+        <result property="imageUrl" column="image_url" jdbcType="VARCHAR"/>
+        <result property="tags" column="tags" jdbcType="VARCHAR"/>
+        <result property="userDescription" column="user_description" jdbcType="VARCHAR"/>
+        <result property="userStatus" column="user_status" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+        <result property="isAdmin" column="is_admin" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+                user_id, user_name, user_count,
+                user_password, user_email, sex,
+                user_phone, image_url, tags,
+                user_description, user_status, create_time,
+                update_time, is_delete, is_admin
+    </sql>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.wei.usercenterweb.mapper.TeamMemberMapper">
+
+    <resultMap id="BaseResultMap" type="org.wei.usercenterweb.domain.TeamMember">
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="teamId" column="team_id" jdbcType="INTEGER"/>
+        <result property="joinTime" column="join_time" jdbcType="TIMESTAMP"/>
+        <result property="isLeader" column="is_leader" jdbcType="TINYINT"/>
+        <result property="isDelete" column="is_delete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,team_id,join_time,
+        is_leader,is_delete
+    </sql>
+    <update id="modifyPartyMemberStatus">
+        update team_member
+        set is_delete = #{status}
+        where user_id = #{userId}
+          and team_id = #{teamId}
+    </update>
+
+    <select id="recording" resultMap="BaseResultMap">
+        select *
+        from team_member
+        where user_id = #{userId}
+          and team_id = #{teamId}
+    </select>
+</mapper>
