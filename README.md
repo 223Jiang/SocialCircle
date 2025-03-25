@@ -48,7 +48,7 @@ src/main/java/org/wei/usercenterweb/
 ### 配置说明
 1. 克隆项目
 ```bash
-git clone [项目地址]
+git clone https://github.com/223Jiang/SocialCircle.git
 ```
 
 2. 修改配置
@@ -58,7 +58,11 @@ git clone [项目地址]
 
 3. 启动项目
 ```bash
+cd user-center-web
 mvn spring-boot:run
+
+cd user-dating-ui
+npm run dev
 ```
 
 ## 开发规范
@@ -79,11 +83,9 @@ mvn spring-boot:run
 3. 分支管理
    - master: 主分支，用于生产环境
    - develop: 开发分支
-   - feature/*: 功能分支
-   - hotfix/*: 紧急修复分支
 
 ## 文档
-- [API文档](http://localhost:8080/doc.html)
+- [API文档](http://localhost:8081/api/doc.html)
 - [数据库设计文档](docs/database.md)
 - [部署文档](docs/deploy.md)
 
@@ -94,11 +96,11 @@ mvn spring-boot:run
 4. 创建 Pull Request
 
 ## 版本历史
-- v0.0.1-SNAPSHOT: 项目初始化
+- v1.0-SNAPSHOT: 项目v1.0
 
 ## 许可证
 本项目采用 [MIT](LICENSE) 许可证
 
 ## 联系方式
-- 项目负责人：[姓名]
-- 邮箱：[邮箱地址] 
+- 项目负责人：WeiWei
+- 邮箱：2879838778jiang@gmail.com
