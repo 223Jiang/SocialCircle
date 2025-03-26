@@ -9,16 +9,36 @@ import {
   List,
   Card,
   Pagination,
-  Dialog,
   showLoadingToast, showSuccessToast, showFailToast, closeToast
 } from 'vant';
 import instance from "../utils/request.ts";
 
+// 定义接口
+interface Team {
+  id: number;
+  name: string;
+  description?: string;
+  createTime?: string;
+  num: number;
+  maxNum: number;
+  status: number;
+  leaderName: string;
+}
+
+interface SearchForm {
+  nameKeyword: string;
+  status: number | null;
+  members: number | null;
+  joinable: boolean;
+  current: number;
+  pageSize: number;
+}
+
 // 搜索参数
-const searchForm = ref({
+const searchForm = ref<SearchForm>({
   nameKeyword: '',
-  status: null as number | null,
-  members: null as number | null,
+  status: null,
+  members: null,
   joinable: false,
   current: 1,
   pageSize: 10
@@ -26,7 +46,7 @@ const searchForm = ref({
 
 // 队伍状态映射
 const statusOptions = [
-  { text: '全部', value: null },
+  { text: '全部', value: 0 },
   { text: '公开', value: 0 },
   { text: '加密', value: 2 }
 ];
@@ -69,7 +89,7 @@ const onPageChange = (page: number) => {
 };
 
 // 格式化时间
-const formatDate = (dateStr: string) => {
+const formatDate = (dateStr: string | undefined): string => {
   return dateStr ? dateStr.replace('T', ' ').slice(0, 16) : '';
 };
 
@@ -77,7 +97,7 @@ const formatDate = (dateStr: string) => {
 getTeamList();
 
 // 控制描述展开与收起
-const toggleDescription = ref<{ [key: number]: boolean }>({});
+const toggleDescription = ref<Record<number, boolean>>({});
 const toggleDesc = (id: number) => {
   toggleDescription.value[id] = !toggleDescription.value[id];
 };
@@ -86,16 +106,17 @@ const toggleDesc = (id: number) => {
 const joinTeam = async (team: Team) => {
   // 处理加密队伍密码验证
   if (team.status === 2) {
-    Dialog.confirm({
-      title: '输入密码',
-      message: '请输入队伍密码',
-      inputType: 'password',
-      showCancelButton: true,
-    }).then(async (password) => {
-      await handleJoin(team.id, password);
-    }).catch(() => {});
+    currentTeamId.value = team.id;
+    showPasswordDialog.value = true;
   } else {
-    await handleJoin(team.id);
+    handleJoin(team.id);
+  }
+};
+
+const handlePasswordConfirm = async () => {
+  if (currentTeamId.value && passwordInput.value) {
+    await handleJoin(currentTeamId.value, passwordInput.value);
+    passwordInput.value = '';
   }
 };
 
@@ -117,6 +138,10 @@ const handleJoin = async (teamId: number, password?: string) => {
     closeToast();
   }
 };
+
+const showPasswordDialog = ref(false);
+const passwordInput = ref('');
+const currentTeamId = ref<number | null>(null);
 </script>
 
 <template>
@@ -145,7 +170,7 @@ const handleJoin = async (teamId: number, password?: string) => {
       <Popup v-model:show="showStatusPicker" position="bottom">
         <Picker
             :columns="statusOptions"
-            @confirm="(val) => {
+            @confirm="(val: any) => {
               searchForm.status = val.selectedOptions[0].value;
               statusText = statusOptions.find(opt => opt.value === searchForm.status)?.text || '全部';
               showStatusPicker = false;
@@ -153,25 +178,6 @@ const handleJoin = async (teamId: number, password?: string) => {
             @cancel="showStatusPicker = false"
         />
       </Popup>
-
-<!--      &lt;!&ndash; 成员数量 &ndash;&gt;
-      <Field label="成员数量" class="field">
-        <template #input>
-          <van-stepper
-              v-model="searchForm.members"
-              min="1"
-              max="15"
-              theme="round"
-              button-size="22"
-              integer
-              :disable-input="false"
-              @change="(value) => {
-                if (value < 1) searchForm.members = 1;
-                if (value >= 15) searchForm.members = 15;
-              }"
-          />
-        </template>
-      </Field>-->
 
       <!-- 可加入状态 -->
       <Field label="仅显示可加入" class="field">
@@ -186,7 +192,12 @@ const handleJoin = async (teamId: number, password?: string) => {
       <van-button type="primary" size="large" @click="getTeamList">搜索</van-button>
       <van-button size="large" @click="() => {
         searchForm = {
-          current: 1, pageSize: 10
+          nameKeyword: '',
+          status: null,
+          members: null,
+          joinable: false,
+          current: 1,
+          pageSize: 10
         };
         getTeamList();
       }">重置</van-button>
@@ -211,17 +222,17 @@ const handleJoin = async (teamId: number, password?: string) => {
           </div>
         </template>
         <div class="team-content">
-          <p v-if="toggleDescription.value[team.id]">{{ team.description || '暂无描述' }}</p>
+          <p v-if="toggleDescription[team.id]">{{ team.description || '暂无描述' }}</p>
           <van-button
               size="small"
-              type="text"
+              plain
               class="toggle-desc-btn"
               @click="toggleDesc(team.id)"
           >
-            {{ toggleDescription.value[team.id] ? '收起' : '展开' }} 描述
+            {{ toggleDescription[team.id] ? '收起' : '展开' }} 描述
           </van-button>
           <div class="status-tag">
-            {{ ['公开', '私有', '加密'][team.status] }}
+            {{ ['公开', '私有', '加密'][team.status] || '未知' }}
           </div>
         </div>
         <template #footer>
@@ -232,16 +243,16 @@ const handleJoin = async (teamId: number, password?: string) => {
                 size="small"
                 type="primary"
                 :disabled="team.num >= team.maxNum"
-            @click="joinTeam(team)"
+                @click="joinTeam(team)"
             >
-            {{ team.num >= team.maxNum ? '已满员' : '加入队伍' }}  <!-- 根据队伍人数动态改变显示文字 -->
+              {{ team.num >= team.maxNum ? '已满员' : '加入队伍' }}
             </van-button>
           </div>
         </template>
       </Card>
     </List>
 
-    <!-- 分页（添加边界控制） -->
+    <!-- 分页 -->
     <Pagination
         v-model:current="searchForm.current"
         :total="total"
@@ -251,6 +262,21 @@ const handleJoin = async (teamId: number, password?: string) => {
         :show-page-size="5"
         class="pagination"
     />
+
+    <!-- 密码输入对话框 -->
+    <van-dialog
+        v-model:show="showPasswordDialog"
+        title="输入密码"
+        show-cancel-button
+        @confirm="handlePasswordConfirm"
+    >
+      <Field
+          v-model="passwordInput"
+          type="password"
+          placeholder="请输入密码"
+          class="password-field"
+      />
+    </van-dialog>
   </div>
 </template>
 

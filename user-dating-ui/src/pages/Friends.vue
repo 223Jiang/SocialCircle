@@ -6,6 +6,17 @@ import instance from "../utils/request.ts";
 
 const router = useRouter()
 
+// 初始表单数据
+const initialForm = {
+  name: '', // 圈子名称
+  description: '', // 描述
+  maxNum: null, // 最大人数
+  expireTime: '', // 过期时间
+  status: 0, // 状态值
+  statusText: '公开', // 状态文本
+  password: '' // 密码（仅在加密状态下显示）
+};
+
 // 表单数据
 const teamForm = ref({
   name: '',

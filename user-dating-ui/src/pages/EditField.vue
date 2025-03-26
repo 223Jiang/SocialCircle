@@ -43,7 +43,7 @@ const options = computed(() => {
   return [];
 });
 
-const newTagInput = '';
+const newTagInput = ref('');
 
 // 添加标签
 const addTag = (value: string) => {

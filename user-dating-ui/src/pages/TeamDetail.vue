@@ -92,12 +92,7 @@ const exitTeam = async () => {
 // 解散队伍
 const disbandTeam = async () => {
   try {
-    await instance.post(`/removeMemberByLeader`, null, {
-      params: {
-        teamId: teamId,
-        memberId: currentUser.value.userId
-      }
-    })
+    await instance.post(`/deleteTeam/${teamId}`)
     showToast('队伍已解散')
     router.back()
   } catch (error) {

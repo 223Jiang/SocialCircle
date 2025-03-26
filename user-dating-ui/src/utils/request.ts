@@ -30,7 +30,7 @@ instance.interceptors.response.use(
 
         // 检查响应状态码
         if (data.code === 200) {
-            if (data.details != undefined) {
+            if (data.details != null) {
                 showSuccessToast(data.details as string);
             }
             return {

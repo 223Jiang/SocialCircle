@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { computed, ref, onMounted } from "vue";
+import { computed, ref } from "vue";
 import router from "../router.ts";
 import instance from "../utils/request.ts";
 
-const route = useRoute();
 
 // 初始数据解析
 const initialData = computed(() => {

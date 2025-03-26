@@ -13,4 +13,8 @@ export default {
             resolvers: [VantResolver()],
         }),
     ],
+    server: {
+        port: 5173,
+        strictPort: false, // 允许自动寻找可用端口
+    },
 };
