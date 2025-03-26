@@ -27,11 +27,11 @@ mybatis-plus:
       logic-not-delete-value: 0
 
 minio:
-  endpoint: https://ioapi.creativityhq.club
-  baseUrl: https://minio.creativityhq.club/api/v1/buckets
-  accessKey: Bo377eLJXRKFYeBkurqb
-  secretKey: fgboQykfdPKm5KQEzvDv6fg3PA3cDa2xeKRRNoDM
-  bucket: user-avatars
+  endpoint: 
+  baseUrl: 
+  accessKey: 
+  secretKey: 
+  bucket: 
 knife4j:
   enable: true
   openapi:
