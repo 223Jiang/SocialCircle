@@ -115,10 +115,27 @@ npm run dev
    - master: 主分支，用于生产环境
    - develop: 开发分支
 
-## 文档
-- [API文档](http://localhost:8081/api/doc.html)
-- [数据库设计文档](docs/database.md)
-- [部署文档](docs/deploy.md)
+### 功能特性
+✅ 特性1 ：
+![image](https://github.com/user-attachments/assets/cfe029bd-03ae-474c-838a-da11a2c1a9f7)
+
+✅ 特性2 ：
+![image](https://github.com/user-attachments/assets/c7783cba-9a72-4aa1-9ac6-b3a495e8b56f)
+
+✅ 特性3 ：
+![image](https://github.com/user-attachments/assets/c6282357-504f-4427-a83a-32fa917f4b19)
+
+✅ 特性4 ：
+![image](https://github.com/user-attachments/assets/7b048944-400b-40ca-a45a-e5af5b217687)
+
+✅ 特性5 ：
+![image](https://github.com/user-attachments/assets/366981e3-96fb-4ffc-88d6-c6486d5f8845)
+
+✅ 特性6 ：
+![image](https://github.com/user-attachments/assets/3787b263-2e2c-4db8-ba80-7abff58a7a51)
+
+✅ 特性7 ：
+![image](https://github.com/user-attachments/assets/08f66886-be9d-42b3-b1d4-795572269c24)
 
 ## 贡献指南
 1. Fork 本仓库
