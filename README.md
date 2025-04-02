@@ -3,7 +3,7 @@
 ## 项目简介
 SocialCircle 是一个现代化的社交匹配与圈子管理系统，致力于为用户提供安全、高效、智能的社交体验。系统采用SpringBoot/Vue架构设计，支持高并发、高可用，并遵循企业级开发规范。
 
-**使用地址**：https://um.creativityhq.club/user/login
+**使用地址**：https://sc.creativityhq.club/#/
 
 ## 技术栈
 - **后端框架**: Spring Boot 2.6.13
