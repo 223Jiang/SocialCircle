@@ -133,5 +133,5 @@ npm run dev
 本项目采用 [MIT](LICENSE) 许可证
 
 ## 联系方式
-- 项目负责人：WeiWei
+- 项目负责人：果冻
 - 邮箱：2879838778jiang@gmail.com
