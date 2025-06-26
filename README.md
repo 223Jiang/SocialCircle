@@ -5,7 +5,7 @@ SocialCircle 是一个现代化的社交匹配与圈子管理系统，致力于�
 
 **使用地址**：https://sc.creativityhq.club/#/
 **管理员**：guodon/123456wW
-***普通成员**：xiaoming/123456wW
+**普通成员**：xiaoming/123456wW
 
 ## 技术栈
 - **后端框架**: Spring Boot 2.6.13
