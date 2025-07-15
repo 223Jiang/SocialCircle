@@ -4,7 +4,6 @@
 SocialCircle 是一个现代化的社交匹配与圈子管理系统，致力于为用户提供安全、高效、智能的社交体验。系统采用SpringBoot/Vue架构设计，支持高并发、高可用，并遵循企业级开发规范。
 
 **使用地址**：https://sc.creativityhq.club/#/
-**管理员**：guodon/123456wW
 **普通成员**：xiaoming/123456wW
 
 ## 技术栈
